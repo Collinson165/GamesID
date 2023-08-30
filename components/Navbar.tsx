@@ -1,9 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import ThemeToggle from './ThemeToggle'
-import { useAuth } from './useAuth'
+import { useAuth } from '../hooks/useAuth'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 
 const user = {
   name: 'Tom Cook',
@@ -32,6 +35,25 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const {user:loggedUser , loading, logout} = useAuth();
+  const router = useRouter();
+  const [navbarItems, setNavbarItems ] = useState(navigation)
+  const [loggedNavbarItems, setLoggedNavbarItems] = useState(loggedNav)
+
+  useEffect(() => {
+    const updatedItems = navbarItems.map(item => ({
+      ...item,
+      current: item.href === router.pathname,
+    }));
+
+    const updatedLoggedItems = loggedNavbarItems.map(item => ({
+      ...item,
+      current: item.href === router.pathname
+    }));
+
+    setNavbarItems(updatedItems);
+    setLoggedNavbarItems(updatedLoggedItems);
+
+  }, [router.pathname])
 
   const userNavigation = [
     { name: 'Your Profile', href: '#' },
@@ -66,7 +88,7 @@ export default function Navbar() {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {loggedUser ? loggedNav.map((item) => (
+                        {loggedUser ? loggedNavbarItems.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}
@@ -80,7 +102,7 @@ export default function Navbar() {
                           >
                             {item.name}
                           </a>
-                        )): navigation.map((item) => (
+                        )): navbarItems.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}
@@ -115,7 +137,7 @@ export default function Navbar() {
                         <div>
                           <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
-                            {loggedUser && <img className="h-8 w-8 rounded-full" src={loggedUser.photoURLl} alt="" />}
+                            {loggedUser && <img className="h-8 w-8 rounded-full" src={loggedUser.photoURL} alt="" />}
                             {/* <Image className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" /> */}
                           </Menu.Button>
                         </div>
@@ -165,7 +187,20 @@ export default function Navbar() {
 
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {navigation.map((item) => (
+                  {loggedUser ? loggedNavbarItems.map((item) => (
+                    <Disclosure.Button
+                      key={item.name}
+                      as="a"
+                      href={item.href}
+                      className={classNames(
+                        item.current ? 'bg-gray-400 dark:bg-gray-900 text-black dark:text-white' : 'text-gray-800 dark:text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'block rounded-md px-3 py-2 text-base font-medium'
+                      )}
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  )) : navbarItems.map((item) => (
                     <Disclosure.Button
                       key={item.name}
                       as="a"
@@ -200,7 +235,7 @@ export default function Navbar() {
                     <ThemeToggle />
                   </div>
                   <div className="mt-3 space-y-1 px-2">
-                    {loggedUser &&userNavigation.map((item) => (
+                    {loggedUser && userNavigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
                         as="a"

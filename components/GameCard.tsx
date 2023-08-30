@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { ApiSearchObject } from "./GamesSearch";
 import Link from "next/link";
@@ -19,7 +20,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
             <img src={game.cover && game.cover.url} alt={game.name} height={120} width={90} className="w-full" />
             <div className="px-4 py-2">
                 <div className="font-bold text-sm mb:text-xl mb-1">{game.name}</div>
-                <p className="text-gray-700 text-base">{game.release_date.human}</p>
+                {/* <p className="text-gray-700 text-base">{game.release_date.human}</p> */}
             </div>
             <div className="px-4 pt-2 pb-1">
                 <button className="absolute bg-opacity-40 top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">

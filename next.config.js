@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['tailwindui.com', 'images.igdb.com']
+    domains: ['tailwindui.com', 'images.igdb.com', 'lh3.googleusercontent.com']
   },
 }
 

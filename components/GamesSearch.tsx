@@ -2,13 +2,15 @@ import axios from 'axios';
 import { useContext, useState } from 'react';
 import GameCard from './GameCard';
 import { SearchContext } from '../context/searchContext';
+import useFetch from '../hooks/useFetch';
 
 export interface ApiSearchObject {
     id: number;
     name: string;
     summary: string;
     cover: cover;
-    release_date: release_date;
+    release_date: release_date
+    ;
 }
 
 interface cover {
@@ -27,12 +29,21 @@ const GameSearch = () => {
     // const [ searchResult, setSearchResult ] = useState< ApiSearchObject[] >([]);
     const { setSearchResult, searchResults } = useContext(SearchContext);
 
-    const handleSearch = async () => {
+    // const { data, loading, error } = useFetch<any[]>(`/api/api?searchTerm=${searchTerm}`)
+
+    const handleSearch = async  () => {
+        // if (data){
+        //     setSearchResult(data)
+        //     console.log(data)
+        // }
         try{
-            const response = await axios.get(`/api/api?searchTerm=${searchTerm}`);
+            
+            const response = await axios.get(`/api/games/search?searchTerm=${searchTerm}`);
+            console.log(response)
             setSearchResult(response.data);
             console.log(searchResults)
         }catch (error){
+            console.log(error)
             console.error(error);
         }
     };

@@ -1,6 +1,6 @@
 // import { GetServerSideProps, NextApiRequest, NextApiResponse } from "next";
 import { useRouter } from "next/router";
-import { useAuth } from "./useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 
 
@@ -28,7 +28,7 @@ export function withAuth<P extends object>(WrappedComponent: React.ComponentType
         //     }
         // }, [router]);
 
-        return <WrappedComponent {...props} />;
+        return <WrappedComponent user = {user} {...props} />;
     };
 
     ComponentWithAuth.displayName = `withAuth(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;

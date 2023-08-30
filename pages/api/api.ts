@@ -1,4 +1,10 @@
 import axios from "axios";
+import dotenv from 'dotenv';
+
+dotenv.config()
+
+const Client_ID = process.env.CLIENT_ID
+const Authorization = process.env.AUTHORIZATION
 
 export default async function handler(req, res) {
     try {
@@ -8,8 +14,8 @@ export default async function handler(req, res) {
             `fields name,summary,cover.url,release_date.human; search "${ searchTerm }"; limit 50;`,
             {
                 headers: {
-                    'Client-ID': '074qm4f50uqew1t1n7xw27d0xke5dq',
-                    'Authorization': 'Bearer 850suag05yv2kyswn6nkayi92lbqkn',
+                    'Client-ID': Client_ID,
+                    'Authorization': Authorization,
                 },
             }
         );

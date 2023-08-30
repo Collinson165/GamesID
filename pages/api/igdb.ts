@@ -1,20 +1,32 @@
 import axios from "axios"
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const BASE_URL = 'https://api.igdb.com/v4';
 const clientID = process.env.CLIENT_ID;
 const authorization = process.env.AUTHORIZATION;
 const headers = {
-    'Client-ID': '074qm4f50uqew1t1n7xw27d0xke5dq',
-    'Authorization': 'Bearer 850suag05yv2kyswn6nkayi92lbqkn',
+    'Client-ID': clientID,
+    'Authorization': authorization,
+    'Content-Type': 'text/plain',
 }
 
 export async function searchGames(query:string) {
     try {
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `search "${query}"; fields name, summary, cover.url; `,
-            { headers }
+            `fields name, summary, cover.url,release_date.human; search '${query}';  limit 50; `,
+            {
+                headers: {
+                    'Client-ID': clientID,
+                    'Authorization': authorization,
+                    'Content-Type': 'application/json',
+                } 
+
+            }
         );
+        console.log(response.data)
         return response.data;
     } catch (error) {
         console.error('Error Searching games:', error);
