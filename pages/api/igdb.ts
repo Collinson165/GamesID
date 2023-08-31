@@ -53,7 +53,7 @@ export async function getUpcomingGames(){
     try{
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields name, cover.url, release_dates; sort release_dates.date asc; limit 30;`,
+            `fields name, cover.url cover.image_id, release_dates; sort release_dates.date asc; limit 30;`,
             { headers }
         );
         return response.data;
@@ -81,7 +81,7 @@ export async function getTopGames(){
     try{
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields name, cover.url; where platforms = 6; sort popularity asc; limit 50;`,
+            `fields *,name*, cover.url, cover.image_id, release_dates; where rating > 80; sort aggregated_rating desc; limit 50;`,
             { headers },
         );
         return response.data;

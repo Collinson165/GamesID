@@ -11,9 +11,13 @@ export default function Home() {
   const [latestGames, setLatestGames] = useState([]);
   const [upcomingGames, setUpcomingGames] = useState([]);
 
-  const { data: latest, loading, error } = useFetch<any[]>('/api/games/latest')
+  const { data: latest, loading: loadingLatest, error: errorLatest } = useFetch<any[]>('/api/games/latest')
+  const { data: upcoming, loading: loadingUpcoming, error: errorUpcoming } = useFetch<any[]>('/api/games/upcoming')
+  const { data: top, loading: loadingTop, error: errorTop } = useFetch<any[]>('/api/games/top')
 
   console.log(latest)
+  console.log(upcoming)
+  console.log(top)
 
   // useEffect(() => {
   //   const fetchLatestGames =  async () => {
@@ -58,7 +62,21 @@ export default function Home() {
       <div className='min-h-screen px-6 py-12 lg:px-8'>
         <GameSearch />
         
-        <h1 className='py-10 text-lg'>Latest Games</h1>
+        {top && <h1 className='py-10 text-xl font-bold'>Top Games</h1>}
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+            {top && top.map((game) => (
+                <GameCard key={game.id} game={game}/>
+            ))}
+          </div>
+
+          {upcoming && <h1 className='py-10 text-xl font-bold'>Upcoming Games</h1>}
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+            {upcoming && upcoming.map((game) => (
+                <GameCard key={game.id} game={game}/>
+            ))}
+          </div>
+
+          {latest && <h1 className='py-10 text-xl font-bold'>Latest Games</h1>}
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
             {latest && latest.map((game) => (
                 <GameCard key={game.id} game={game}/>
