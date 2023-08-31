@@ -16,17 +16,17 @@ export async function searchGames(query:string) {
     try {
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields name, summary, cover.url,release_date.human; search '${query}';  limit 50; `,
+            `\r\nfields *, name*, summary*, cover.url, cover.image_id, cover.height, cover.width; search "${query}"; limit 30; where version_parent = null;\r\n`,
             {
                 headers: {
                     'Client-ID': clientID,
                     'Authorization': authorization,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'text/plain',
                 } 
 
             }
         );
-        console.log(response.data)
+        console.log(JSON.stringify(response.data))
         return response.data;
     } catch (error) {
         console.error('Error Searching games:', error);
@@ -67,7 +67,7 @@ export async function getLatestGames(){
     try{
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields name, cover.url, release_dates; sort first_release_date desc; limit 30;`,
+            `fields *, name*, summary*, cover.url, cover.image_id, cover.height, cover.width, release_dates; sort first_release_date desc; limit 30;`,
             { headers },
         );
         return response.data;

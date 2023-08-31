@@ -19,6 +19,26 @@ a {
   box-sizing: border-box;
 }
 
+.pulsing-placeholder {
+  width: 600px;
+  height: 800px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  animation: pulsing 1s infinite;
+}
+
+@keyframes pulsing {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

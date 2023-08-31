@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { auth, provider } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, OAuthCredential } from "firebase/auth";

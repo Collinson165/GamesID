@@ -53,6 +53,7 @@ export default function Navbar() {
     setNavbarItems(updatedItems);
     setLoggedNavbarItems(updatedLoggedItems);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.pathname])
 
   const userNavigation = [

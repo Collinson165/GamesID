@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { getLatestGames } from './api/igdb';
 import useFetch from '../hooks/useFetch';
+import GameCard from '../components/GameCard';
 
 export default function Home() {
   const [latestGames, setLatestGames] = useState([]);
@@ -56,6 +57,13 @@ export default function Home() {
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
       <div className='min-h-screen px-6 py-12 lg:px-8'>
         <GameSearch />
+        
+        <h1 className='py-10 text-lg'>Latest Games</h1>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+            {latest && latest.map((game) => (
+                <GameCard key={game.id} game={game}/>
+            ))}
+          </div>
       </div>  
     </div>
     </main>
