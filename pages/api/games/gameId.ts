@@ -1,10 +1,10 @@
 import { getGameById } from "../igdb";
 
 export default async function handler(req, res) {
-    const { gameId } = req.body;
+    const { ID } = req.query;
 
     try {
-        const game = await getGameById(gameId);
+        const game = await getGameById(ID);
         res.status(200).json(game);
         console.log(game);
     } catch (error) {

@@ -50,22 +50,30 @@ const GameSearch = () => {
 
     return (
         <>
-            <div className='flex items-center justify-center pb-6'>
-                <input
+            <div className='flex flex-col items-center justify-center'>
+                <div className='pb-6'>
+                    <input
                     type="text"
                     placeholder='Search Games'
                     className='py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button onClick={handleSearch} className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r-md transition-colors duration-300'>Search</button>
+                    />
+                    <button onClick={handleSearch} className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r-md transition-colors duration-300'>Search</button>
+                </div>
+                
+
+                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+                    {searchResults && searchResults.map((game) => (
+                        <div key={game.id} className='flex justify-center'>
+                            <GameCard game={game}/>
+                        </div>
+                        
+                    ))}
+                </div>
                
             </div>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
-                {searchResults && searchResults.map((game) => (
-                    <GameCard key={game.id} game={game}/>
-                ))}
-            </div>
+            
         </>
         
     );

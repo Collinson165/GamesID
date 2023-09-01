@@ -13,10 +13,10 @@ const GamePage: NextPage<GamesPageProps> = () => {
     const { gameId } = router.query;
     const [game, setGame ] = useState({name: 'default'});
 
-    useEffect( () => {
+    useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/games/${gameId}`)
+                const response = await axios.get(`/api/games/gameId?ID=${gameId}`)
                 setGame(response.data)
             }catch(error){
                 console.log('errorrrr', error);
@@ -32,7 +32,7 @@ const GamePage: NextPage<GamesPageProps> = () => {
 
 
     return (
-        <div>
+        <div className="min-h-screen">
             <h1>Game ID: { gameId }</h1>
             <p>{game && game.name}</p>
         </div>

@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
+const today = Math.floor(new Date().getTime() / 1000)
+
 const BASE_URL = 'https://api.igdb.com/v4';
 const clientID = process.env.CLIENT_ID;
 const authorization = process.env.AUTHORIZATION;
@@ -16,7 +18,7 @@ export async function searchGames(query:string) {
     try {
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `\r\nfields *, name*, summary*, cover.url, cover.image_id, cover.height, cover.width; search "${query}"; limit 30; where version_parent = null;\r\n`,
+            `\r\nfields *, name, cover.url, cover.image_id; search "${query}"; limit 30; where version_parent = null;\r\n`,
             {
                 headers: {
                     'Client-ID': clientID,
@@ -39,8 +41,9 @@ export async function getGameById(id:string){
     try {
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields name, summary, storyline, cover.url; where id = ${id};`,
-            { headers }
+            `fields *, name, summary, storyline, cover.url; where id = ${id};`,
+            {headers}
+               
         );
         return response.data;
     } catch (error) {
@@ -53,9 +56,15 @@ export async function getUpcomingGames(){
     try{
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields name, cover.url cover.image_id, release_dates; sort release_dates.date asc; limit 30;`,
+            // `fields game.name, game.cover.image_id, human, date; where date > ${today} & category = 0; limit 50;`,
+            `fields name, cover.image_id, first_release_date, aggregated_rating, rating; where first_release_date != null & first_release_date > ${today}; sort first_release_date asc; limit 50;`,
             { headers }
         );
+        // const gameData = response.data.map(item => ({
+        //     ...item,
+        //     ...item.game
+        // }))
+        // return gameData;
         return response.data;
     } catch(error) {
         console.error('Error getting upcoming games:', error);
@@ -67,7 +76,7 @@ export async function getLatestGames(){
     try{
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields *, name*, summary*, cover.url, cover.image_id, cover.height, cover.width, release_dates; sort first_release_date desc; limit 30;`,
+            `fields name, cover.image_id, first_release_date, aggregated_rating, rating; where first_release_date != null & first_release_date < ${today} & rating > 0; sort first_release_date desc; limit 50;`,
             { headers },
         );
         return response.data;
@@ -81,7 +90,7 @@ export async function getTopGames(){
     try{
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields *,name*, cover.url, cover.image_id, release_dates; where rating > 80; sort aggregated_rating desc; limit 50;`,
+            `fields *,name*, cover.url, cover.image_id, first_release_date, release_dates.date; where rating > 85 & aggregated_rating > 85; sort aggregated_rating desc; limit 100;`,
             { headers },
         );
         return response.data;

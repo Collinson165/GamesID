@@ -65,21 +65,30 @@ export default function Home() {
         {top && <h1 className='py-10 text-xl font-bold'>Top Games</h1>}
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
             {top && top.map((game) => (
-                <GameCard key={game.id} game={game}/>
+              <div key={game.id} className='flex justify-center'>
+                <GameCard game={game}/>
+              </div>
+                
             ))}
           </div>
 
           {upcoming && <h1 className='py-10 text-xl font-bold'>Upcoming Games</h1>}
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
             {upcoming && upcoming.map((game) => (
-                <GameCard key={game.id} game={game}/>
+              <div key={game.id} className='flex justify-center'>
+                <GameCard game={game}/>
+              </div>
+                
             ))}
           </div>
 
           {latest && <h1 className='py-10 text-xl font-bold'>Latest Games</h1>}
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
             {latest && latest.map((game) => (
-                <GameCard key={game.id} game={game}/>
+              <div key={game.id} className='flex justify-center'>
+                <GameCard game={game}/>
+              </div>
+                
             ))}
           </div>
       </div>  
