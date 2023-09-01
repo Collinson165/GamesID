@@ -59,11 +59,11 @@ export default function Home() {
     </header>
     <main>
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      <div className='min-h-screen px-6 py-12 lg:px-8'>
+      <div className='min-h-screen px-2 py-12 lg:px-8'>
         <GameSearch />
         
         {top && <h1 className='py-10 text-xl font-bold'>Top Games</h1>}
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6'>
             {top && top.map((game) => (
               <div key={game.id} className='flex justify-center'>
                 <GameCard game={game}/>

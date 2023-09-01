@@ -22,7 +22,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
                 <p className="text-gray-600">{game.releaseYear}</p>
 
             </div> */}
-            <div className="max-w-sm rounded-md overflow-hidden shadow-lg w-3/4 h-fit relative">
+            <div className="max-w-sm rounded-md overflow-hidden shadow-lg w-full h-fit relative">
             {/* <img src={game.cover && game.cover.url} alt={game.name} height={120} width={90} className="w-full" /> */}
             <img src={game.cover ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt={game.name} height="800" width={600} className="w-full" />
             <div className="px-4 py-2">
