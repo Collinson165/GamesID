@@ -41,7 +41,7 @@ const useFetch = <T>(url: string): useFetchState<T> => {
         return () => {
             console.log('Cleaning up fetch')
         }
-    }, [fetchData]);
+    }, []);
 
     return { data, loading, error };
 
