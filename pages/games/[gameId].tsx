@@ -66,13 +66,13 @@ const GamePage: NextPage<GamesPageProps> = () => {
       {/* Content container */}
       <div className="min-h-screen grid place-items-center font-mono relative z-20">
     
-      <div className="rounded-md bg-gray-800 shadow-lg m-10 bg-opacity-90">
+      <div className="rounded-md bg-gray-800 shadow-lg m-10 bg-opacity-90 transition hover:scale-95">
       <div className="md:flex px-4 leading-none max-w-4xl">
           <div className="flex-none ">
             <img
             src={game ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game[0].cover.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`}
             alt={game ? game[0].name: ''}
-            className="h-72 w-56 rounded-md transform -translate-y-4 border-4 border-gray-300 shadow-lg"
+            className="h-72 w-56 rounded-md transform -translate-y-4 border-4 border-gray-300 shadow-lg transition hover:scale-105"
           />           
           </div>
 
@@ -124,9 +124,9 @@ const GamePage: NextPage<GamesPageProps> = () => {
     </div>
     
   </div>
-  <div className="px-6 py-6 bg-gradient-to-t from-gray-900 to-black">
+  <div className="px-6 py-6 bg-gradient-to-t from-gray-900 to-black font-['Press_Start_2P']">
       <p>{game && game[0].storyline}</p>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center py-4">
         <div className="w-28 p-2">
           <CircularProgressbar value={game && Math.round(game[0].total_rating)} text={`${game && Math.round(game[0].total_rating)}%`} />
           <p className="text-sm text-center">{game && game[0].total_rating_count} average</p>
