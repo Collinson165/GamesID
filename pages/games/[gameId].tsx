@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { CircularProgressbar } from "react-circular-progressbar";
+import Vibrant from "node-vibrant";
+import 'react-circular-progressbar/dist/styles.css';
 
 interface GamesPageProps {
     
@@ -14,9 +17,20 @@ const GamePage: NextPage<GamesPageProps> = () => {
     const { gameId } = router.query;
     const [game, setGame ] = useState<any>(null);
 
+    // const vibrant = Vibrant.from(`https://images.igdb.com/igdb/image/upload/t_720p/${game ? game[0].screenshots[0].image_id : 'fwjvpiu2ircdq5afkm1o'}.jpg`)
+    // vibrant.getPalette((err, palette) => {
+    //   if(err){
+    //     console.log('vibrant error')
+
+    //   }else {
+    //     const accentColor = palette?.Vibrant?.hex
+    //     console.log(accentColor);
+    //   }
+    // })
+
     const backgroundStyle = {
       backgroundImage: `url(https://images.igdb.com/igdb/image/upload/t_720p/${game ? game[0].screenshots[0].image_id : ''}.jpg)`,
-      backgroundSize: '100% 100%',
+      // backgroundSize: '100% 100%',
       // filter: 'blur(1px)',
     }
 
@@ -47,12 +61,12 @@ const GamePage: NextPage<GamesPageProps> = () => {
     return (    
       <div className="min-h-screen">
       {/* Blurred background overlay */}
-      <div style={backgroundStyle} className="absolute inset-auto w-full h-full filter backdrop-grayscale bg-gradient-to-t to-gray-200 from-black  opacity-20 z-10"></div>
+      <div style={backgroundStyle} className="absolute bg-cover md:bg-full inset-auto w-full h-full filter backdrop-grayscale bg-gradient-to-t to-gray-200 from-black  opacity-40 z-10"></div>
 
       {/* Content container */}
       <div className="min-h-screen grid place-items-center font-mono relative z-20">
     
-      <div className="rounded-md bg-gray-800 shadow-lg m-10">
+      <div className="rounded-md bg-gray-800 shadow-lg m-10 bg-opacity-90">
       <div className="md:flex px-4 leading-none max-w-4xl">
           <div className="flex-none ">
             <img
@@ -108,10 +122,27 @@ const GamePage: NextPage<GamesPageProps> = () => {
       </div>
 
     </div>
-    <div className="px-6 py-6">
-      <p>{game && game[0].storyline}</p>
-    </div>
+    
   </div>
+  <div className="px-6 py-6 bg-gradient-to-t from-gray-900 to-black">
+      <p>{game && game[0].storyline}</p>
+      <div className="flex justify-center items-center">
+        <div className="w-28 p-2">
+          <CircularProgressbar value={game && Math.round(game[0].total_rating)} text={`${game && Math.round(game[0].total_rating)}%`} />
+          <p className="text-sm text-center">{game && game[0].total_rating_count} average</p>
+        </div>
+        <div className="w-28 p-2">
+          <CircularProgressbar value={game && Math.round(game[0].rating)} text={`${game && Math.round(game[0].rating)}%`} />
+          <p className="text-sm text-center">{game && game[0].rating_count} member</p>
+        </div>
+        <div className="w-28 p-2">
+          <CircularProgressbar value={game && Math.round(game[0].aggregated_rating)} text={`${game && Math.round(game[0].aggregated_rating)}%`} />
+          <p className="text-sm text-center">{game && game[0].aggregated_rating_count} critics</p>
+        </div>
+        
+      </div>
+      
+    </div>
       
   </div>
 

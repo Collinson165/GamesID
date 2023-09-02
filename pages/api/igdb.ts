@@ -41,7 +41,7 @@ export async function getGameById(id:string){
     try {
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields *, name, summary, storyline, cover.image_id, genres.name, involved_companies.company.*, platforms.name, screenshots.image_id; where id = ${id};`,
+            `fields *, name, summary, storyline, cover.image_id, genres.name, involved_companies.company.*, platforms.name, screenshots.image_id, artworks.image_id; where id = ${id};`,
             {headers}
                
         );

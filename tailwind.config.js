@@ -5,7 +5,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundSize: {
+        'full': '100% 100%'
+      },
+    },
   },
   plugins: [],
   darkMode: 'class',
