@@ -9,8 +9,10 @@ interface GameCardProps {
 
 const GameCard: React.FC<GameCardProps> = ({ game }) => {
     const convertTimeStampToYear = (timestamp) => {
+        const options: any = {year: 'numeric', month: 'long', day: 'numeric'};
         const date = new Date(timestamp * 1000)
-        return date.getFullYear()
+        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date)
+        return formattedDate;
     }
     
     

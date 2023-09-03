@@ -71,7 +71,7 @@ export default function Navbar() {
         <body class="h-full">
         ```
       */}
-      <div className="min-h-full">
+      <div className="min-h-full z-40">
         <Disclosure as="nav" className="bg-gray-300 dark:bg-gray-800">
           {({ open }) => (
             <>

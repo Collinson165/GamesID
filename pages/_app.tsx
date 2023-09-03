@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import { ThemeProvider } from 'next-themes'
 import { SearchProvider } from '../context/searchContext'
 import Footer from '../components/Footer'
+import 'flowbite/dist/flowbite.css'
 
 function MyApp({ Component, pageProps }) {
   return (
