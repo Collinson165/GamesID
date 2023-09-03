@@ -1,9 +1,6 @@
 import GameSearch from '../components/GamesSearch'
-import Example from '../components/Example'
-import Header from '../components/Header'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-import { getLatestGames } from './api/igdb';
 import useFetch from '../hooks/useFetch';
 import GameCard from '../components/GameCard';
 

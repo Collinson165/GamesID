@@ -55,7 +55,7 @@ const GameSearch = () => {
                     <input
                     type="text"
                     placeholder='Search Games'
-                    className='py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    className='py-2 px-1 md:px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
