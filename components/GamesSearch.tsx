@@ -2,42 +2,14 @@ import axios from 'axios';
 import { useContext, useState } from 'react';
 import GameCard from './GameCard';
 import { SearchContext } from '../context/searchContext';
-import useFetch from '../hooks/useFetch';
 
-export interface ApiSearchObject {
-    id: number;
-    name: string;
-    summary: string;
-    cover: cover;
-    release_date: release_date
-    ;
-}
-
-interface cover {
-    id: number;
-    url: string;
-}
-
-interface release_date {
-    id: number;
-    human: string;
-}
 
 
 const GameSearch = () => {
     const [ searchTerm, setSearchTerm ] = useState< string >('');
-    // const [ searchResult, setSearchResult ] = useState< ApiSearchObject[] >([]);
     const { setSearchResult, searchResults } = useContext(SearchContext);
-
-    // const { data, loading, error } = useFetch<any[]>(`/api/api?searchTerm=${searchTerm}`)
-
     const handleSearch = async  () => {
-        // if (data){
-        //     setSearchResult(data)
-        //     console.log(data)
-        // }
-        try{
-            
+        try{ 
             const response = await axios.get(`/api/games/search?searchTerm=${searchTerm}`);
             console.log(response)
             setSearchResult(response.data);
@@ -55,7 +27,7 @@ const GameSearch = () => {
                     <input
                     type="text"
                     placeholder='Search Games'
-                    className='py-2 px-1 md:px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    className='py-2 px-1 dark:bg-gray-400 md:px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
