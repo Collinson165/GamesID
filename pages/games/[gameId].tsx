@@ -89,7 +89,7 @@ const GamePage: NextPage<GamesPageProps> = () => {
                 <p className="pt-4 text-2xl font-bold">{game && game[0].name}({game && convertTimeStampToYear(game[0].first_release_date)})</p>
                 <hr className="hr-text" data-content="" />
                 <div className="text-md flex justify-between px-4 my-2">
-                  <span className="font-bold">{game && game[0].involved_companies[0].company.name} | {game && game[0].genres.map(item => `${item.name}, `)}</span>
+                  {game && <span className="font-bold">{game[0].involved_companies && game[0].involved_companies[0].company.name} | {game && game[0].genres.map(item => `${item.name}, `)}</span>}
                   <span className="font-bold"></span>
                 </div>
                 <p className="hidden md:block px-4 my-4 text-sm text-left">{game && game[0].summary}</p>
@@ -158,44 +158,55 @@ const GamePage: NextPage<GamesPageProps> = () => {
     {/* MEDIA: Artworks, Screenshots, Videos */}
 
     <div className="bg-gray-400 font-['Press_Start_2P'] dark:bg-gray-900">
-      <h1>ARTWORKS</h1>
-      <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
-        <Carousel slide={false}>
-          {game && game[0].artworks.map((item, index) => (
-            <div key={index} className="max-w-4xl flex justify-center items-center">
-              <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
-            </div>
+      {<div>
+        <h1>ARTWORKS</h1>
+        <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
+          <Carousel slide={false}>
+            {game[0].artworks.map((item, index) => (
+              <div key={index} className="max-w-4xl flex justify-center items-center">
+                <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
+              </div>
+                
               
-            
-          ))}
-        </Carousel>
+            ))}
+          </Carousel>
+        </div>
+      </div>}
+
+      <div>
+        <h1>SCREENSHOTS</h1>
+        <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
+          <Carousel>
+            {game[0].screenshots.map((item, index) => (
+              <div key={index} className="max-w-4xl flex justify-center items-center">
+                <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
+              </div>
+                
+              
+            ))}
+          </Carousel>
+        </div>        
       </div>
 
-      <h1>SCREENSHOTS</h1>
-      <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
-        <Carousel>
-          {game && game[0].screenshots.map((item, index) => (
-            <div key={index} className="max-w-4xl flex justify-center items-center">
-              <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
-            </div>
+      <div>
+        <h1>VIDEOS</h1>
+        <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
+          <Carousel slide={false}>
+            {game && game[0].videos.map((item, index) => (
+              <div key={index} className="flex justify-center items-center h-full max-w-4xl">
+                <iframe  src={game ? `https://www.youtube.com/embed/${item.video_id}?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;` : ``}  className="h-full w-full" allow="autoplay; clipboard-write; picture-in-picture; web-share" />
+              </div>
+                
               
-            
-          ))}
-        </Carousel>
-      </div> 
+            ))}
+          </Carousel>
+        </div>        
+      </div>
 
-      <h1>VIDEOS</h1>
-      <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
-        <Carousel slide={false}>
-          {game && game[0].videos.map((item, index) => (
-            <div key={index} className="flex justify-center items-center h-full max-w-4xl">
-              <iframe  src={game ? `https://www.youtube.com/embed/${item.video_id}?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;` : ``}  className="h-full w-full" allow="autoplay; clipboard-write; picture-in-picture; web-share" />
-            </div>
-              
-            
-          ))}
-        </Carousel>
-      </div>   
+
+ 
+
+   
 
       <h1>SIMILAR GAMES</h1>
       <div className="p-2 md:p-6 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-2 font-[Poppins] text-sm">

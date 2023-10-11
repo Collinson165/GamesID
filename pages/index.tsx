@@ -24,9 +24,9 @@ export default function Home() {
       <div className='min-h-screen px-2 py-12 lg:px-8'>
         <GameSearch />
         
-        {top && <h1 className='py-10 text-xl font-bold'>Top Games</h1>}
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6'>
-            {top && top.map((game) => (
+          {upcoming && <h1 className='py-10 text-xl font-bold'>Upcoming Games</h1>}
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+            {upcoming && upcoming.map((game) => (
               <div key={game.id} className='flex justify-center'>
                 <GameCard game={game}/>
               </div>
@@ -34,9 +34,9 @@ export default function Home() {
             ))}
           </div>
 
-          {upcoming && <h1 className='py-10 text-xl font-bold'>Upcoming Games</h1>}
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
-            {upcoming && upcoming.map((game) => (
+          {top && <h1 className='py-10 text-xl font-bold'>Top Games</h1>}
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6'>
+            {top && top.map((game) => (
               <div key={game.id} className='flex justify-center'>
                 <GameCard game={game}/>
               </div>

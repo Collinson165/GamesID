@@ -90,7 +90,7 @@ export async function getTopGames(){
     try{
         const response = await axios.post(
             `${BASE_URL}/games`,
-            `fields *,name*, cover.url, cover.image_id, first_release_date, release_dates.date; where rating > 85 & aggregated_rating > 85; sort aggregated_rating desc; limit 100;`,
+            `fields *,name*, cover.url, cover.image_id, first_release_date, release_dates.date; where rating > 85 & aggregated_rating > 85 & follows > 20; sort aggregated_rating desc; limit 100;`,
             { headers },
         );
         return response.data;
