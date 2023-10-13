@@ -20,7 +20,7 @@ const GamePage: NextPage<GamesPageProps> = () => {
   const [game, setGame ] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const backgroundStyle = {
-    backgroundImage: `url(https://images.igdb.com/igdb/image/upload/t_720p/${game ? game[0].screenshots[0].image_id : ''}.jpg)`,
+    backgroundImage: `url(https://images.igdb.com/igdb/image/upload/t_720p/${game && game[0].screenshots ? game[0].screenshots[0].image_id : ''}.jpg)`,
   };
 
   const handleAddToFavorites = () => {
@@ -158,50 +158,54 @@ const GamePage: NextPage<GamesPageProps> = () => {
     {/* MEDIA: Artworks, Screenshots, Videos */}
 
     <div className="bg-gray-400 font-['Press_Start_2P'] dark:bg-gray-900">
-      {<div>
+        
+        
+          
+    {(game && game[0].artworks) && game[0].artworks.map((item, index) => (
+      <div key={index}>
         <h1>ARTWORKS</h1>
         <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
           <Carousel slide={false}>
-            {game[0].artworks.map((item, index) => (
-              <div key={index} className="max-w-4xl flex justify-center items-center">
-                <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
-              </div>
-                
-              
-            ))}
-          </Carousel>
+          <div className="max-w-4xl flex justify-center items-center">
+            <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
+          </div>
+          </Carousel>  
         </div>
-      </div>}
-
-      <div>
-        <h1>SCREENSHOTS</h1>
-        <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
-          <Carousel>
-            {game[0].screenshots.map((item, index) => (
-              <div key={index} className="max-w-4xl flex justify-center items-center">
-                <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
-              </div>
-                
-              
-            ))}
-          </Carousel>
-        </div>        
       </div>
+    ))}
 
-      <div>
-        <h1>VIDEOS</h1>
-        <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
-          <Carousel slide={false}>
-            {game && game[0].videos.map((item, index) => (
-              <div key={index} className="flex justify-center items-center h-full max-w-4xl">
-                <iframe  src={game ? `https://www.youtube.com/embed/${item.video_id}?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;` : ``}  className="h-full w-full" allow="autoplay; clipboard-write; picture-in-picture; web-share" />
-              </div>
+      
+           
+    {(game && game[0].screenshots) && game[0].screenshots.map((item, index) => (
+    <div key={index}>  
+      <h1>SCREENSHOTS</h1>  
+      <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">
+        <Carousel>  
+          <div  className="max-w-4xl flex justify-center items-center">
+            <img  src={game ? `https://images.igdb.com/igdb/image/upload/t_720p/${item.image_id}.jpg` : `https://images.igdb.com/igdb/image/upload/t_thumb/undefined.jpg`} alt="" className="" />
+          </div>
+        </Carousel>    
+      </div> 
+    </div> 
+    ))}
+          
                 
-              
-            ))}
-          </Carousel>
-        </div>        
+          
+    {(game && game[0].videos) && game[0].videos.map((item, index) => (
+    <div key={index}>  
+      <h1>VIDEOS</h1>  
+      <div className="h-52 md:h-[50vh] m-4 p-1 md:p-4 md:px-16">  
+        <Carousel slide={false}>  
+          <div className="flex justify-center items-center h-full max-w-4xl">
+            <iframe  src={game ? `https://www.youtube.com/embed/${item.video_id}?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;` : ``}  className="h-full w-full" allow="autoplay; clipboard-write; picture-in-picture; web-share" />
+          </div>
+        </Carousel>
       </div>
+    </div>    
+    ))}
+          
+                
+      
 
 
  
@@ -245,8 +249,6 @@ const GamePage: NextPage<GamesPageProps> = () => {
           
       </div>   
     </div>
-
-  
 
   </div>
   </>
