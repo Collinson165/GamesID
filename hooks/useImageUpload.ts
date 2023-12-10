@@ -44,7 +44,7 @@ const useImageUpload = () => {
             console.error('Erro000r Uploading Image:', error);
         } finally {
             setIsLoading(false);
-        }
+        } 
     }
 
     return {imageUrl, error, isLoading, uploadImage };

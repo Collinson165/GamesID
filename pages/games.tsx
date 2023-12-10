@@ -3,9 +3,9 @@ import useFetch from '../hooks/useFetch';
 import GameCard from '../components/GameCard';
 
 export default function Games() {
-  const { data: latest, loading: loadingLatest, error: errorLatest } = useFetch<any[]>('/api/games/latest')
-  const { data: upcoming, loading: loadingUpcoming, error: errorUpcoming } = useFetch<any[]>('/api/games/upcoming')
-  const { data: top, loading: loadingTop, error: errorTop } = useFetch<any[]>('/api/games/top')
+  const { data: latest, loading: loadingLatest, error: errorLatest } = useFetch<any[]>('/api/games/latest');
+  const { data: upcoming, loading: loadingUpcoming, error: errorUpcoming } = useFetch<any[]>('/api/games/upcoming');
+  const { data: top, loading: loadingTop, error: errorTop } = useFetch<any[]>('/api/games/top');
 
   console.log(latest)
   console.log(upcoming)
