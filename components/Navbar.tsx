@@ -57,7 +57,7 @@ export default function Navbar() {
   }, [router.pathname])
 
   const userNavigation = [
-    { name: 'Your Profile', href: '#' },
+    { name: 'Your Profile', href: '/account' },
     { name: 'Settings', href: '#' },
     { name: 'Sign out', href: '#'},
   ]
