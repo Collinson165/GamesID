@@ -25,6 +25,11 @@ export default function Login(){
         }
     }
 
+    const handleGoogleLogin = () => {
+        router.push('http://localhost:8000/accounts/google/login');
+    }
+
+
     return(
         <>
         {/*
@@ -105,7 +110,7 @@ export default function Login(){
             </form>
             <button
                 className="flex w-full justify-center rounded-md bg-red-600 px-3 my-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-                onClick={() => ''}
+                onClick={handleGoogleLogin}
             >
                 Sign in with Google
             </button>
